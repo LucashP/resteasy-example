@@ -17,6 +17,8 @@
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <jetty-maven-plugin.version>9.4.4.v20170414</jetty-maven-plugin.version>
         <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+
+        <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
     </properties>
 
     <dependencies>
@@ -56,19 +58,26 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty-maven-plugin.version}</version>
                 <configuration>
                     <webApp>
-                        <contextPath>/</contextPath>
+                        <contextPath>/example/</contextPath>
                     </webApp>
                 </configuration>
             </plugin>
+
+            <!-- JBoss AS plugin to deploy war -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>${version.jboss.maven.plugin}</version>
             </plugin>
         </plugins>
     </build>
