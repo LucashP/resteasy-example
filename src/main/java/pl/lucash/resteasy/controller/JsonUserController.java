@@ -1,12 +1,11 @@
 package pl.lucash.resteasy.controller;
 
-import pl.lucash.resteasy.resource.User;
+import pl.lucash.resteasy.domain.User;
 import pl.lucash.resteasy.resource.UserResource;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.Set;
+import java.util.List;
 
 @Path("/json/users")
 public class JsonUserController {
@@ -26,19 +25,7 @@ public class JsonUserController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return userResource.all();
-    }
-
-    @GET
-    @Path("/test")
-    public Response test() {
-        return Response.ok(new User("a", "b"), MediaType.APPLICATION_JSON).build();
-    }
-
-    @GET
-    @Path("/test")
-    public Response test1() {
-        return Response.ok(new User("a", "b"), MediaType.APPLICATION_JSON).build();
     }
 }

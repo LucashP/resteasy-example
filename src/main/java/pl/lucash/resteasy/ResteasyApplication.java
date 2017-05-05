@@ -27,3 +27,4 @@ public class ResteasyApplication extends Application {
         return singletons;
     }
 }
+
