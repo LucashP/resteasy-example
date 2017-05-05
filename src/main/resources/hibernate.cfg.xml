@@ -14,25 +14,25 @@
     <session-factory>
 
         <!-- Database connection settings -->
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/resteasy</property>
-        <property name="connection.username">lpula</property>
-        <property name="connection.password">password</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/resteasy</property>
+        <property name="hibernate.connection.username">lpula</property>
+        <property name="hibernate.connection.password">password</property>
 
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="connection.pool_size">100</property>
+        <property name="hibernate.connection.pool_size">100</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
         <!-- Disable the second-level cache  -->
-        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+        <property name="hibernate.cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
 
         <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">true</property>
+        <property name="hibernate.show_sql">true</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!-- Names the annotated entity class -->
         <mapping class="pl.lucash.resteasy.domain.User"/>

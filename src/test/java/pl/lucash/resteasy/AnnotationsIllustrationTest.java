@@ -26,9 +26,9 @@ package pl.lucash.resteasy;
 import junit.framework.TestCase;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 import java.util.Date;
 import java.util.List;
@@ -44,12 +44,13 @@ public class AnnotationsIllustrationTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
+        super.setUp();
         // A SessionFactory is set up once for an application!
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml") // configures settings from hibernate.cfg.xml
                 .build();
         try {
-            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+            sessionFactory = new Configuration().configure().buildSessionFactory(registry);
         } catch (Exception e) {
             // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
             // so destroy it manually.
@@ -59,6 +60,7 @@ public class AnnotationsIllustrationTest extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
+        super.tearDown();
         if (sessionFactory != null) {
             sessionFactory.close();
         }

@@ -25,6 +25,7 @@ public class UserResource {
         return instance;
     }
 
+    @SuppressWarnings("unchecked")
     public List<User> all() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -42,7 +43,7 @@ public class UserResource {
         session.beginTransaction();
 
         Serializable serializable = session.save(user);
-        user = session.get(User.class, serializable);
+        user = (User) session.get(User.class, serializable);
 
         session.getTransaction().commit();
         session.close();
