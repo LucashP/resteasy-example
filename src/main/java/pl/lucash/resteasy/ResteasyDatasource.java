@@ -18,7 +18,10 @@ public class ResteasyDatasource {
                 .configure("hibernate.cfg.xml") // configures settings from hibernate.cfg.xml
                 .build();
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory(registry);
+            sessionFactory = new Configuration()
+                    .configure()
+                    .buildSessionFactory(registry);
+
         } catch (Exception e) {
             // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
             // so destroy it manually.

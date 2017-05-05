@@ -49,4 +49,8 @@ public class UserResource {
         session.close();
         return user;
     }
+
+    public int add(int i, int j) {
+        return i + j;
+    }
 }
