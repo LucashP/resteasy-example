@@ -1,4 +1,4 @@
-package pl.lucash.resteasy.domain;
+package pl.lucash.resteasy;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

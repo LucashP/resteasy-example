@@ -1,7 +1,4 @@
-package pl.lucash.resteasy.controller;
-
-import pl.lucash.resteasy.domain.User;
-import pl.lucash.resteasy.resource.UserResource;
+package pl.lucash.resteasy;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +10,8 @@ public class JsonUserController {
     private UserResource userResource;
 
     public JsonUserController() {
-        userResource = UserResource.getInstance();
+        ResteasyDatasource instance = ResteasyDatasource.getInstance();
+        userResource = UserResource.getInstance(instance);
     }
 
     @POST

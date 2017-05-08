@@ -1,7 +1,4 @@
-package pl.lucash.resteasy.controller;
-
-import pl.lucash.resteasy.domain.User;
-import pl.lucash.resteasy.resource.UserResource;
+package pl.lucash.resteasy;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,19 +10,20 @@ public class XmlUserController {
     private UserResource userResource;
 
     public XmlUserController() {
-        userResource = UserResource.getInstance();
+        ResteasyDatasource instance = ResteasyDatasource.getInstance();
+        userResource = UserResource.getInstance(instance);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
     @Produces(MediaType.APPLICATION_XML)
-    public User addUser(User user) {
+    User addUser(User user) {
         return userResource.add(user);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public List<User> getUsers() {
+    List<User> getUsers() {
         return userResource.all();
     }
 }
