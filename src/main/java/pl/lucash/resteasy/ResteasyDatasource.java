@@ -21,7 +21,7 @@ public class ResteasyDatasource {
         return instance;
     }
 
-    public static void init() {
+    public static ResteasyDatasource init() {
         getInstance();
 
         try {
@@ -29,6 +29,7 @@ public class ResteasyDatasource {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return instance;
     }
 
     @Override

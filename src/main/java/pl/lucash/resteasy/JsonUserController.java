@@ -9,9 +9,8 @@ public class JsonUserController {
 
     private UserResource userResource;
 
-    public JsonUserController() {
-        ResteasyDatasource instance = ResteasyDatasource.getInstance();
-        userResource = UserResource.getInstance(instance);
+    public JsonUserController(UserResource userResource) {
+        this.userResource = userResource;
     }
 
     @POST

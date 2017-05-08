@@ -9,15 +9,19 @@ public class ResteasyApplication extends Application {
     private Set<Object> singletons = new HashSet<Object>();
     private Set<Class<?>> empty = new HashSet<Class<?>>();
 
+    private ResteasyDatasource resteasyDatasource;
+    private UserResource userResource;
+
     public ResteasyApplication() {
         init();
 
-        singletons.add(new JsonUserController());
-        singletons.add(new XmlUserController());
+        singletons.add(new JsonUserController(userResource));
+        singletons.add(new XmlUserController(userResource));
     }
 
     private void init() {
-        ResteasyDatasource.init();
+        resteasyDatasource = ResteasyDatasource.init();
+        userResource = UserResource.getInstance(resteasyDatasource);
     }
 
     @Override

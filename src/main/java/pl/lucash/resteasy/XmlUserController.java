@@ -9,9 +9,8 @@ public class XmlUserController {
 
     private UserResource userResource;
 
-    public XmlUserController() {
-        ResteasyDatasource instance = ResteasyDatasource.getInstance();
-        userResource = UserResource.getInstance(instance);
+    public XmlUserController(UserResource userResource) {
+        this.userResource = userResource;
     }
 
     @POST

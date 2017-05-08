@@ -12,6 +12,7 @@ public class UserResource {
     private final ResteasyDatasource datasource;
 
     private UserResource(ResteasyDatasource resteasyDatasource) {
+        System.out.println(resteasyDatasource);
         datasource = resteasyDatasource;
     }
 
@@ -36,6 +37,7 @@ public class UserResource {
         Serializable serializable = session.save(user);
         user = (User) session.get(User.class, serializable);
         datasource.endTransaction(session);
+
         return user;
     }
 
