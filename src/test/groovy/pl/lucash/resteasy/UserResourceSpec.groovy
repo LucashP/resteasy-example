@@ -5,8 +5,8 @@ import spock.lang.Unroll
 
 class UserResourceSpec extends Specification {
 
-    ResteasyDatasource resteasyDatasource = ResteasyDatasource.instance
-    UserResource userResource = UserResource.getInstance(resteasyDatasource)
+    ResteasyDatasource resteasyDatasource = new ResteasyDatasource()
+    UserResource userResource = new UserResource(resteasyDatasource)
 
     @Unroll("should add numbers i=[#i] j=[#j]")
     def "should add numbers"() {

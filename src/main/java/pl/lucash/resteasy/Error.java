@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Error {
     private String message;
     private String clazz;
+    private String test = "Custom Error";
 
     Error(String message, String clazz) {
         this.message = message;
@@ -18,5 +19,9 @@ public class Error {
 
     public String getClazz() {
         return clazz;
+    }
+
+    public String getTest() {
+        return test;
     }
 }

@@ -6,34 +6,29 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-public class ResteasyDatasource {
-    private static ResteasyDatasource instance;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.ApplicationScoped;
+import java.util.logging.Logger;
 
+@ApplicationScoped
+public class ResteasyDatasource {
+
+    private static final Logger LOGGER = Logger.getLogger(ResteasyDatasource.class.getName());
     private SessionFactory sessionFactory;
 
-    private ResteasyDatasource() {
-    }
-
-    public static ResteasyDatasource getInstance() {
-        if (instance == null) {
-            instance = new ResteasyDatasource();
-        }
-        return instance;
-    }
-
-    public static ResteasyDatasource init() {
-        getInstance();
-
+    @PostConstruct
+    public void postConstruct() {
+        LOGGER.info(this.toString());
         try {
-            instance.setUp();
+            setUp();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return instance;
     }
 
-    @Override
-    public void finalize() {
+    @PreDestroy
+    public void preDestroy() {
         try {
             tearDown();
         } catch (Exception e) {
