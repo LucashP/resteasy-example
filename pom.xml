@@ -24,6 +24,7 @@
         <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
         <jetty-maven-plugin.version>9.4.4.v20170414</jetty-maven-plugin.version>
         <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
         <gmavenplus-plugin.version>1.5</gmavenplus-plugin.version>
     </properties>
 
@@ -128,6 +129,11 @@
                 <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>${version.jboss.maven.plugin}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${version.wildfly.maven.plugin}</version>
             </plugin>
 
             <plugin>

@@ -16,13 +16,13 @@ public class XmlUserController {
     @POST
     @Consumes(MediaType.APPLICATION_XML)
     @Produces(MediaType.APPLICATION_XML)
-    User addUser(User user) {
+    public User addUser(User user) {
         return userResource.add(user);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    List<User> getUsers() {
+    public List<User> getUsers() {
         return userResource.all();
     }
 }
