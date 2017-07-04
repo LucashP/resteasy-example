@@ -20,11 +20,9 @@
         <spock-core.version>1.1-groovy-2.4-rc-3</spock-core.version>
 
         <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+        <maven-war-plugin.version>3.0.0</maven-war-plugin.version>
         <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
         <jetty-maven-plugin.version>9.4.4.v20170414</jetty-maven-plugin.version>
-        <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
-        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
         <gmavenplus-plugin.version>1.5</gmavenplus-plugin.version>
     </properties>
 
@@ -54,6 +52,11 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jackson-provider</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-servlet-initializer</artifactId>
             <version>${resteasy.version}</version>
         </dependency>
 
@@ -108,11 +111,8 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven-deploy-plugin.version}</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
@@ -124,18 +124,6 @@
                     </webApp>
                 </configuration>
             </plugin>
-            <!-- JBoss AS plugin to deploy war -->
-            <plugin>
-                <groupId>org.jboss.as.plugins</groupId>
-                <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>${version.jboss.maven.plugin}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>${version.wildfly.maven.plugin}</version>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
