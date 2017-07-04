@@ -8,9 +8,13 @@ import org.hibernate.cfg.Configuration;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.logging.Logger;
 
+@Singleton
+@Startup
 @ApplicationScoped
 public class ResteasyDatasource {
 
@@ -19,7 +23,7 @@ public class ResteasyDatasource {
 
     @PostConstruct
     public void postConstruct() {
-        LOGGER.info(this.toString());
+        LOGGER.info("postConstruct() method " + this.toString());
         try {
             setUp();
         } catch (Exception e) {
@@ -29,6 +33,7 @@ public class ResteasyDatasource {
 
     @PreDestroy
     public void preDestroy() {
+        LOGGER.info("preDestroy() method " + this.toString());
         try {
             tearDown();
         } catch (Exception e) {
