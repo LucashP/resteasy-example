@@ -14,4 +14,9 @@
         <class-a>pl.lucash.resteasy.user.dto.UserDTO</class-a>
         <class-b>pl.lucash.resteasy.user.User</class-b>
     </mapping>
+
+    <mapping>
+        <class-a>pl.lucash.resteasy.book.dto.BookDTO</class-a>
+        <class-b>pl.lucash.resteasy.book.Book</class-b>
+    </mapping>
 </mappings>

@@ -1,5 +1,6 @@
 package pl.lucash.resteasy.user;
 
+import org.apache.log4j.Logger;
 import org.dozer.DozerBeanMapper;
 import org.hibernate.Session;
 import pl.lucash.resteasy.infrastructure.AppConfig;
@@ -8,26 +9,24 @@ import pl.lucash.resteasy.user.dto.UserDTO;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Named
+//@Named
 @ApplicationScoped
-class UserResource {
+class UserService {
 
-    private static final Logger LOGGER = Logger.getLogger(UserResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(UserService.class);
     private DozerBeanMapper dozerBeanMapper;
     private DataSource dataSource;
 
-    UserResource() {
+    UserService() {
     }
 
     @Inject
-    UserResource(AppConfig appConfig) {
+    UserService(AppConfig appConfig) {
         this.dozerBeanMapper = appConfig.getDozerBeanMapper();
         this.dataSource = appConfig.getDataSource();
     }

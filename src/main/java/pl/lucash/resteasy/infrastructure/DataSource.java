@@ -1,5 +1,6 @@
 package pl.lucash.resteasy.infrastructure;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -11,19 +12,18 @@ import javax.annotation.PreDestroy;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.enterprise.context.ApplicationScoped;
-import java.util.logging.Logger;
 
 @Singleton
 @Startup
 @ApplicationScoped
 public class DataSource {
 
-    private static final Logger LOGGER = Logger.getLogger(DataSource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DataSource.class);
+
     private SessionFactory sessionFactory;
 
     @PostConstruct
     public void postConstruct() {
-        LOGGER.info("postConstruct() method " + this.toString());
         try {
             setUp();
         } catch (Exception e) {
@@ -33,7 +33,6 @@ public class DataSource {
 
     @PreDestroy
     public void preDestroy() {
-        LOGGER.info("preDestroy() method " + this.toString());
         try {
             tearDown();
         } catch (Exception e) {
@@ -42,6 +41,7 @@ public class DataSource {
     }
 
     private void setUp() throws Exception {
+        LOGGER.debug("setUp method()");
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml")
                 .build();
@@ -49,24 +49,29 @@ public class DataSource {
             sessionFactory = new Configuration()
                     .configure()
                     .buildSessionFactory(registry);
+            LOGGER.debug(sessionFactory);
         } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
             StandardServiceRegistryBuilder.destroy(registry);
         }
     }
 
     private void tearDown() throws Exception {
+        LOGGER.debug("tearDown method()");
         if (sessionFactory != null) {
             sessionFactory.close();
         }
     }
 
     public Session beginTransaction() {
+        LOGGER.debug("beginTransaction method()");
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         return session;
     }
 
     public void endTransaction(Session session) {
+        LOGGER.debug("endTransaction method()");
         session.getTransaction().commit();
         session.close();
     }

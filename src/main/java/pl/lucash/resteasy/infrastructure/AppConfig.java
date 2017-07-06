@@ -1,5 +1,6 @@
 package pl.lucash.resteasy.infrastructure;
 
+import org.apache.log4j.Logger;
 import org.dozer.DozerBeanMapper;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 @Startup
 @ApplicationScoped
 public class AppConfig {
+
+    private static final Logger LOGGER = Logger.getLogger(AppConfig.class);
 
     private DozerBeanMapper dozerBeanMapper;
     private DataSource dataSource;
