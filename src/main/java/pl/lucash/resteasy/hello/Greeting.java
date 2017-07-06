@@ -1,4 +1,4 @@
-package pl.lucash.resteasy;
+package pl.lucash.resteasy.hello;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

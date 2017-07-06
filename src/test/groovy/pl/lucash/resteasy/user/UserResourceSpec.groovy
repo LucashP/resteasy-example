@@ -1,12 +1,13 @@
-package pl.lucash.resteasy
+package pl.lucash.resteasy.user
 
+import pl.lucash.resteasy.infrastructure.AppConfig
 import spock.lang.Specification
 import spock.lang.Unroll
 
 class UserResourceSpec extends Specification {
 
-    ResteasyDatasource resteasyDatasource = new ResteasyDatasource()
-    UserResource userResource = new UserResource(resteasyDatasource)
+    AppConfig appConfig = new AppConfig(null)
+    UserResource userResource = new UserResource(appConfig)
 
     @Unroll("should add numbers i=[#i] j=[#j]")
     def "should add numbers"() {

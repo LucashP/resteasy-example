@@ -1,4 +1,4 @@
-package pl.lucash.resteasy;
+package pl.lucash.resteasy.infrastructure;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,9 +16,9 @@ import java.util.logging.Logger;
 @Singleton
 @Startup
 @ApplicationScoped
-public class ResteasyDatasource {
+public class DataSource {
 
-    private static final Logger LOGGER = Logger.getLogger(ResteasyDatasource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DataSource.class.getName());
     private SessionFactory sessionFactory;
 
     @PostConstruct

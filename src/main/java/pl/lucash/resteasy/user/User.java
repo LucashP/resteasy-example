@@ -1,10 +1,7 @@
-package pl.lucash.resteasy;
+package pl.lucash.resteasy.user;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.UUID;
 
-@XmlRootElement
 @Entity
 public class User {
 
@@ -17,15 +14,6 @@ public class User {
     @Column(nullable = false)
     private String firstName;
     private String lastName;
-
-    public User() {
-    }
-
-    public User(String firstName, String lastName) {
-        this.uuid = UUID.randomUUID().toString();
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
     public Long getId() {
         return id;

@@ -1,4 +1,6 @@
-package pl.lucash.resteasy;
+package pl.lucash.resteasy.user;
+
+import pl.lucash.resteasy.user.dto.UserDTO;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -23,13 +25,13 @@ public class XmlUserController {
     @POST
     @Consumes(MediaType.APPLICATION_XML)
     @Produces(MediaType.APPLICATION_XML)
-    public User addUser(User user) {
-        return userResource.add(user);
+    public UserDTO addUser(UserDTO userDTO) {
+        return userResource.add(userDTO);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public List<User> getUsers() {
+    public List<UserDTO> getUsers() {
         return userResource.all();
     }
 }

@@ -1,4 +1,6 @@
-package pl.lucash.resteasy;
+package pl.lucash.resteasy.user;
+
+import pl.lucash.resteasy.user.dto.UserDTO;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -23,13 +25,13 @@ public class JsonUserController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public User addUser(User user) {
+    public UserDTO addUser(UserDTO user) {
         return userResource.add(user);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<User> getUsers() {
+    public List<UserDTO> getUsers() {
         return userResource.all();
     }
 }
