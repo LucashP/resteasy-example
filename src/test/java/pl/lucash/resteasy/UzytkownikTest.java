@@ -62,7 +62,7 @@ public class UzytkownikTest extends TestCase {
         }
     }
 
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({"unchecked", "JUnit4AnnotatedMethodInJUnit3TestCase"})
     @Ignore
     public void testBasicUsage() {
         Session session = sessionFactory.openSession();
@@ -83,6 +83,7 @@ public class UzytkownikTest extends TestCase {
         session.close();
     }
 
+    @SuppressWarnings("JUnit4AnnotatedMethodInJUnit3TestCase")
     @Ignore
     public void testModify() {
         Session session = sessionFactory.openSession();
@@ -95,6 +96,7 @@ public class UzytkownikTest extends TestCase {
         session.close();
     }
 
+    @SuppressWarnings({"unchecked", "UnnecessaryUnboxing"})
     public void testAudit() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();

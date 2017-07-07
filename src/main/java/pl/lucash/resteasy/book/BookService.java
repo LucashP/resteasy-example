@@ -39,6 +39,7 @@ class BookService {
         return dozerBeanMapper.map(book, BookDTO.class);
     }
 
+    @SuppressWarnings("unchecked")
     List<BookDTO> all() {
         Session session = dataSource.beginTransaction();
         List<Book> result = (List<Book>) session.createQuery("from Book").list();
@@ -46,7 +47,7 @@ class BookService {
         return result.stream().map(book -> dozerBeanMapper.map(book, BookDTO.class)).collect(Collectors.toList());
     }
 
-    public BookDTO find(String isbn) {
+    BookDTO find(String isbn) {
         Session session = dataSource.beginTransaction();
         Book book = (Book) session.get(Book.class, isbn);
         dataSource.endTransaction(session);
