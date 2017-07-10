@@ -1,4 +1,6 @@
-package pl.lucash.resteasy.infrastructure;
+package pl.lucash.resteasy.infrastructure.exception;
+
+import pl.lucash.resteasy.infrastructure.Error;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;

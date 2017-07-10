@@ -1,20 +1,18 @@
 package pl.lucash.resteasy.book;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.Test;
+import pl.lucash.resteasy.BaseIt;
 
-import static io.restassured.RestAssured.given;
-
-public class LibraryResourceIt {
+public class LibraryResourceIt extends BaseIt {
 
     @Test
     public void getBooks() {
-        given()
-            .log().all()
-        .when()
-            .get("/example/library/books")
-        .then()
-            .log().all()
+        Response response = given()
+                .when()
+                .get("/example/library/books");
+        then(response)
             .statusCode(200);
     }
 
@@ -22,12 +20,10 @@ public class LibraryResourceIt {
     public void getBookByIsbn() {
         String isbn = "GeneratedISBN";
 
-        given()
-            .log().all()
-        .when()
-            .get("/example/library/books/" + isbn)
-        .then()
-            .log().all()
+        Response response = given()
+                .when()
+                .get("/example/library/books/" + isbn);
+        then(response)
             .statusCode(200);
     }
 
@@ -35,12 +31,10 @@ public class LibraryResourceIt {
     public void getBookById() {
         int id = 1;
 
-        given()
-            .log().all()
-        .when()
-            .get("/example/library/books/" + id)
-        .then()
-            .log().all()
+        Response response = given()
+                .when()
+                .get("/example/library/books/" + id);
+        then(response)
             .statusCode(200);
     }
 
@@ -49,15 +43,13 @@ public class LibraryResourceIt {
         String isbn = "GeneratedISBN";
         String name = "GeneratedName";
 
-        given()
-            .contentType(ContentType.JSON.toString())
-            .queryParam("isbn", isbn)
-            .queryParam("name", name)
-            .log().all()
-        .when()
-            .post("/example/library/book/" + isbn)
-        .then()
-            .log().all()
+        Response response = given()
+                .contentType(ContentType.JSON.toString())
+                .queryParam("isbn", isbn)
+                .queryParam("name", name)
+            .when()
+                .post("/example/library/book/" + isbn);
+        then(response)
             .statusCode(200);
     }
 }

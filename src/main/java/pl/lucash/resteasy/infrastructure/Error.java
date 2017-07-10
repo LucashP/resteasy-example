@@ -8,7 +8,7 @@ public class Error {
     private String clazz;
     private String test = "Custom Error";
 
-    Error(String message, String clazz) {
+    public Error(String message, String clazz) {
         this.message = message;
         this.clazz = clazz;
     }
