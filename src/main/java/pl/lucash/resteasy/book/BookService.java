@@ -3,17 +3,19 @@ package pl.lucash.resteasy.book;
 import org.apache.log4j.Logger;
 import org.dozer.DozerBeanMapper;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import pl.lucash.resteasy.book.dto.BookDTO;
 import pl.lucash.resteasy.infrastructure.AppConfig;
 import pl.lucash.resteasy.infrastructure.DataSource;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.NotFoundException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-//@Named
 @ApplicationScoped
 class BookService {
 
@@ -49,8 +51,25 @@ class BookService {
 
     BookDTO find(String isbn) {
         Session session = dataSource.beginTransaction();
-        Book book = (Book) session.get(Book.class, isbn);
+        Book book = (Book) session.createCriteria(Book.class)
+                .add(Restrictions.eq("isbn", isbn))
+                .uniqueResult();
+        Optional.ofNullable(book).ifPresent(b -> LOGGER.info(b.toString()));
         dataSource.endTransaction(session);
-        return dozerBeanMapper.map(book, BookDTO.class);
+
+        return Optional.ofNullable(book)
+                .map(b -> dozerBeanMapper.map(b, BookDTO.class))
+                .orElseThrow(() -> new NotFoundException("Book with isbn " + isbn));
+    }
+
+    BookDTO find(Integer id) {
+        Session session = dataSource.beginTransaction();
+        Book book = (Book) session.get(Book.class, id);
+        Optional.ofNullable(book).ifPresent(b -> LOGGER.info(b.toString()));
+        dataSource.endTransaction(session);
+
+        return Optional.ofNullable(book)
+                .map(b -> dozerBeanMapper.map(b, BookDTO.class))
+                .orElseThrow(() -> new NotFoundException("Book with id " + id));
     }
 }

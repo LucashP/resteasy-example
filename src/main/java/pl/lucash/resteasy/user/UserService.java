@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-//@Named
 @ApplicationScoped
 class UserService {
 

@@ -1,20 +1,31 @@
 package pl.lucash.resteasy.book;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Book {
 
     @Id
-    private int isbn;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(unique = true, nullable = false)
+    private String isbn;
     private String name;
 
-    public int getIsbn() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -29,7 +40,8 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "isbn=" + isbn +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }

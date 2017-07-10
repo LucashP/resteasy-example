@@ -27,22 +27,34 @@ public class LibraryResource {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<BookDTO> getBooks() {
+        LOGGER.info("getBooks()");
         return bookService.all();
     }
 
     @GET
-    @Path("/book/{isbn}")
+    @Path("/books/{id: \\d+}")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public BookDTO getBook(@PathParam("id") Integer id) {
+        LOGGER.info("getBook() -> id=" + id);
+        return bookService.find(id);
+    }
+
+    @GET
+    @Path("/books/{isbn}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public BookDTO getBook(@PathParam("isbn") String isbn) {
+        LOGGER.info("getBook() -> isbn=" + isbn);
         return bookService.find(isbn);
     }
 
     @POST
     @Path("/book/{isbn}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public BookDTO addBook(@PathParam("isbn") String id, @QueryParam("name") String name) {
+    public BookDTO addBook(@PathParam("isbn") String isbn, @QueryParam("name") String name) {
+        LOGGER.info("addBook() -> isbn=" + isbn + ",name=" + name);
         BookDTO bookDTO = new BookDTO();
-        bookDTO.setIsbn(id);
+        bookDTO.setIsbn(isbn);
         bookDTO.setName(name);
         return bookService.add(bookDTO);
     }
@@ -50,7 +62,7 @@ public class LibraryResource {
     @DELETE
     @Path("/book/{id}")
     public void removeBook(@PathParam("id") String id) {
-
+        LOGGER.info("removeBook() " + id);
     }
 
 }
