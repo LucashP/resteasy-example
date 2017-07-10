@@ -2,27 +2,42 @@ package pl.lucash.resteasy.book;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.Before;
 import org.junit.Test;
-import pl.lucash.resteasy.BaseIt;
+import pl.lucash.resteasy.infrastructure.BaseIt;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Optional;
 
 public class LibraryResourceIt extends BaseIt {
+
+    @Before
+    public void before() throws FileNotFoundException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = Optional.ofNullable(classLoader.getResource("library.sql"))
+                .map(url -> new File(url.getFile()))
+                .orElseThrow(FileNotFoundException::new);
+
+        databaseConnector.runScript(file);
+    }
 
     @Test
     public void getBooks() {
         Response response = given()
                 .when()
-                .get("/example/library/books");
+                .get("/library/books");
         then(response)
             .statusCode(200);
     }
 
     @Test
     public void getBookByIsbn() {
-        String isbn = "GeneratedISBN";
+        String isbn = "GeneratedISBN1";
 
         Response response = given()
                 .when()
-                .get("/example/library/books/" + isbn);
+                .get("/library/books/" + isbn);
         then(response)
             .statusCode(200);
     }
@@ -33,22 +48,22 @@ public class LibraryResourceIt extends BaseIt {
 
         Response response = given()
                 .when()
-                .get("/example/library/books/" + id);
+                .get("/library/books/" + id);
         then(response)
             .statusCode(200);
     }
 
     @Test
     public void addBook() {
-        String isbn = "GeneratedISBN";
-        String name = "GeneratedName";
+        String isbn = "GeneratedISBN3";
+        String name = "GeneratedName3";
 
         Response response = given()
                 .contentType(ContentType.JSON.toString())
                 .queryParam("isbn", isbn)
                 .queryParam("name", name)
             .when()
-                .post("/example/library/book/" + isbn);
+                .post("/library/book/" + isbn);
         then(response)
             .statusCode(200);
     }

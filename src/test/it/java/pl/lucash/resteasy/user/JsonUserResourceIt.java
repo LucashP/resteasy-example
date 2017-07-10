@@ -2,32 +2,37 @@ package pl.lucash.resteasy.user;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import pl.lucash.resteasy.infrastructure.BaseIt;
 import pl.lucash.resteasy.user.dto.UserDTO;
 
-public class JsonUserResourceIt {
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Optional;
+
+public class JsonUserResourceIt extends BaseIt {
 
     @Before
-    public void setUp() throws Exception {
-        System.out.println("setUp");
+    public void before() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = Optional.ofNullable(classLoader.getResource("user.sql"))
+                .map(url -> new File(url.getFile()))
+                .orElseThrow(FileNotFoundException::new);
+        databaseConnector.init();
+        databaseConnector.runScript(file);
     }
-
 
     @Test
     public void getUsers() {
-        Response response = RestAssured
-                .given()
+        Response response = given()
                 .contentType(ContentType.JSON.toString())
                 .when()
-                .get("/example/json/users");
+                .get("/json/users");
 
-        response.then().statusCode(200);
-        response.getBody().prettyPrint();
+        then(response).statusCode(200);
     }
 
     @Test
@@ -39,20 +44,13 @@ public class JsonUserResourceIt {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
 
-        Response response = RestAssured
-                .given()
-                    .contentType(ContentType.JSON.toString())
-                    .body(gson.toJson(userDTO))
+        Response response = given()
+                .contentType(ContentType.JSON.toString())
+                .body(gson.toJson(userDTO))
                 .when()
-                    .post("/example/json/users");
+                .post("/json/users");
 
-        response.then().statusCode(200);
-        response.getBody().prettyPrint();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        System.out.println("tearDown");
+        then(response).statusCode(200);
     }
 
 }

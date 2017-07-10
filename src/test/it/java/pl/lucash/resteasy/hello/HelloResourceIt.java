@@ -1,18 +1,22 @@
 package pl.lucash.resteasy.hello;
 
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Test;
+import pl.lucash.resteasy.infrastructure.BaseIt;
+
+import java.io.FileNotFoundException;
 
 import static org.hamcrest.Matchers.equalTo;
 
-public class HelloResourceIt {
+public class HelloResourceIt extends BaseIt {
 
     @Test
-    public void hello() {
-        Response response = RestAssured.get("/example/hello/");
-        response.then().statusCode(200);
-        response.then().body("message", equalTo("Say Hello"));
-        response.getBody().prettyPrint();
+    public void hello() throws FileNotFoundException {
+        Response response = given()
+                .when()
+                .get("/hello/");
+        then(response)
+                .statusCode(200)
+                .body("message", equalTo("Say Hello"));
     }
 }

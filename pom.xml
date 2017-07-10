@@ -115,6 +115,13 @@
             <version>${gson.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.4</version>
+            <scope>test</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>joda-time</groupId>
