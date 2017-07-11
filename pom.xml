@@ -168,7 +168,9 @@
                 <configuration>
                     <useFile>false</useFile>
                     <includes>
-                        <include>**/*Spec.java</include>
+                        <include>**/*UnitSpec.java</include>
+                        <include>**/*ItTest.java</include>
+                        <!--<include>**/*ApiTest.java</include>-->
                     </includes>
                 </configuration>
             </plugin>
